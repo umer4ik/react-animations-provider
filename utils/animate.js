@@ -22,7 +22,7 @@ const defaultOptions = {
 }
 
 export function animation (inputOptions: AnimationOptions): Result {
-  const options = {
+  const options: AnimationOptions = {
     ...defaultOptions,
     ...inputOptions
   }
@@ -36,14 +36,15 @@ export function animation (inputOptions: AnimationOptions): Result {
       options.onStart()
       let start = performance.now()
       this.progress = true
-      requestAnimationFrame(function animate (time) {
+      let frame = requestAnimationFrame(function animate (time) {
         let timeFraction = (time - start) / options.duration
         if (timeFraction > 1) timeFraction = 1
         const progress = options.easing(timeFraction)
-        options.draw(progress)
         if (timeFraction < 1 && result.progress) {
-          requestAnimationFrame(animate)
+          options.draw(progress)
+          frame = requestAnimationFrame(animate)
         } else {
+          cancelAnimationFrame(frame)
           result.stop()
         }
       })
