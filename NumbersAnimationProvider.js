@@ -101,7 +101,16 @@ const NumbersAnimationProvider = (WrappedComponent) => class extends Component {
     const keys = this.getUpdatedAnimatedKeys(this.props, nextProps)
     keys.forEach(key => {
       this.clearAnimation(key)
-      const animation = this.createAnimation(key, nextProps.animate)
+      const from = typeof this.state[key] !== 'undefined'
+        ? this.state[key]
+        : this.props.animate[key].to
+      const animation = this.createAnimation(key, {
+        ...nextProps.animate,
+        [key]: {
+          ...nextProps.animate[key],
+          from
+        }
+      })
       this.addAnimation(key, animation)
       this.runAnimation(key)
     })
