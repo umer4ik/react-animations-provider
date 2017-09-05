@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { animation } from './utils/animate'
 import ease from 'ease-component'
 
-const NumbersAnimationProvider = (WrappedComponent) => class extends Component {
+const numbersAnimationProvider = (WrappedComponent) => class extends Component {
   constructor (props, context, updater) {
     super(props, context, updater)
     if (!props.animate) {
@@ -125,4 +125,4 @@ const NumbersAnimationProvider = (WrappedComponent) => class extends Component {
   }
 }
 
-export default NumbersAnimationProvider
+export default numbersAnimationProvider
