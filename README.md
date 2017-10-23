@@ -1,2 +1,2 @@
 # react-animations-provider
-HOC for animations in React
+HOC for JS-driver animations in React
